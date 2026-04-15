@@ -29,7 +29,15 @@ public class EditActivity
                 .FindAsync(request.Activity.Id)
                 ?? throw new Exception("Activity not found");
 
-            _mapper.Map(request.Activity, activity);
+            activity.Title = request.Activity.Title ?? activity.Title;
+            activity.Description = request.Activity.Description ?? activity.Description;
+            activity.Date = request.Activity.Date;
+            activity.Category = request.Activity.Category ?? activity.Category;
+            activity.City = request.Activity.City ?? activity.City;
+            activity.Venue = request.Activity.Venue ?? activity.Venue;
+            activity.IsCancelled = request.Activity.IsCancelled;
+            activity.Latitude = request.Activity.Latitude;
+            activity.Longitude = request.Activity.Longitude;
 
             await _context.SaveChangesAsync(cancellationToken);
         }

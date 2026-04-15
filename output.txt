@@ -1,0 +1,59 @@
+* Host localhost:5001 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:5001...
+* Connected to localhost (::1) port 5001
+* ALPN: curl offers h2,http/1.1
+* (304) (OUT), TLS handshake, Client hello (1):
+} [314 bytes data]
+* (304) (IN), TLS handshake, Server hello (2):
+{ [94 bytes data]
+* TLSv1.2 (IN), TLS handshake, Certificate (11):
+{ [968 bytes data]
+* TLSv1.2 (IN), TLS handshake, Server key exchange (12):
+{ [333 bytes data]
+* TLSv1.2 (IN), TLS handshake, Server finished (14):
+{ [4 bytes data]
+* TLSv1.2 (OUT), TLS handshake, Client key exchange (16):
+} [70 bytes data]
+* TLSv1.2 (OUT), TLS change cipher, Change cipher spec (1):
+} [1 bytes data]
+* TLSv1.2 (OUT), TLS handshake, Finished (20):
+} [16 bytes data]
+* TLSv1.2 (IN), TLS change cipher, Change cipher spec (1):
+{ [1 bytes data]
+* TLSv1.2 (IN), TLS handshake, Finished (20):
+{ [16 bytes data]
+* SSL connection using TLSv1.2 / ECDHE-RSA-AES256-GCM-SHA384 / [blank] / UNDEF
+* ALPN: server accepted h2
+* Server certificate:
+*  subject: CN=localhost
+*  start date: Jan 11 22:03:55 2026 GMT
+*  expire date: Jan 11 22:03:55 2027 GMT
+*  issuer: CN=localhost
+*  SSL certificate verify ok.
+* using HTTP/2
+* [HTTP/2] [1] OPENED stream for https://localhost:5001/api/activities/071db47f-ed08-4c7d-88cb-21995292fba2
+* [HTTP/2] [1] [:method: PUT]
+* [HTTP/2] [1] [:scheme: https]
+* [HTTP/2] [1] [:authority: localhost:5001]
+* [HTTP/2] [1] [:path: /api/activities/071db47f-ed08-4c7d-88cb-21995292fba2]
+* [HTTP/2] [1] [user-agent: curl/8.7.1]
+* [HTTP/2] [1] [accept: */*]
+* [HTTP/2] [1] [content-type: application/json]
+* [HTTP/2] [1] [content-length: 221]
+> PUT /api/activities/071db47f-ed08-4c7d-88cb-21995292fba2 HTTP/2
+> Host: localhost:5001
+> User-Agent: curl/8.7.1
+> Accept: */*
+> Content-Type: application/json
+> Content-Length: 221
+> 
+} [221 bytes data]
+* upload completely sent off: 221 bytes
+< HTTP/2 204 
+< date: Tue, 14 Apr 2026 20:21:26 GMT
+< server: Kestrel
+< 
+{ [0 bytes data]
+* Connection #0 to host localhost left intact
