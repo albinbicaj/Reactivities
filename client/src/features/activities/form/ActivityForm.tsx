@@ -1,14 +1,19 @@
 import { Box, Button, Paper, TextField, Typography } from '@mui/material'
 import { useActivities } from '../../../lib/hooks/useActivities'
+import { Link, useNavigate, useParams } from 'react-router'
+import { useEffect, useState } from 'react'
 
-type Props = {
-    activity?: Activity,
-    closeForm: () => void
-}
+export default function ActivityForm() {
+    const { id } = useParams()
+    const navigate = useNavigate()
+    const { updateActivity, createActivity, activity: fetchedActivity, isPendingActivity } = useActivities(id)
+    const [activity, setActivity] = useState<Activity | undefined>(undefined)
 
-export default function ActivityForm({ activity, closeForm }: Props) {
+    useEffect(() => {
+        if (id && fetchedActivity) setActivity(fetchedActivity)
+    }, [id, fetchedActivity])
 
-    const { updateActivity, createActivity } = useActivities()
+    if (id && isPendingActivity) return <Typography>Loading...</Typography>
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -20,25 +25,26 @@ export default function ActivityForm({ activity, closeForm }: Props) {
         if (activity) {
             const updatedActivity = { ...activity, ...data }
             await updateActivity.mutateAsync(updatedActivity as unknown as Activity)
-            closeForm()
+            navigate(`/activities/${activity.id}`)
         }
         else {
+            const newId = crypto.randomUUID()
             const newActivity = {
                 ...data,
-                id: crypto.randomUUID(),
+                id: newId,
                 isCancelled: false,
                 latitude: 0,
                 longitude: 0,
             }
             await createActivity.mutateAsync(newActivity as unknown as Activity)
-            closeForm()
+            navigate('/activities')
         }
     }
 
     return (
         <Paper sx={{ borderRadius: 3, p: 3 }}>
             <Typography variant='h5' gutterBottom color='primary'>
-                Create a new activity
+                {activity ? 'Edit activity' : 'Create a new activity'}
             </Typography>
             <Box component='form' onSubmit={handleSubmit} display='flex' flexDirection='column' gap={3}>
 
@@ -55,10 +61,10 @@ export default function ActivityForm({ activity, closeForm }: Props) {
                 <TextField name='venue' label='Venue' variant='outlined' defaultValue={activity?.venue || ''} />
                 <Box display='flex' justifyContent='flex-end' gap={2}>
 
-                    <Button variant='contained' color='inherit' onClick={closeForm}>
+                    <Button component={Link} to={activity ? `/activities/${activity.id}` : '/activities'} variant='contained' color='inherit'>
                         Cancel
                     </Button>
-                    <Button variant='contained' color='success' type='submit' loading={updateActivity.isPending}
+                    <Button variant='contained' color='success' type='submit'
                         disabled={updateActivity.isPending || createActivity.isPending}
                     >
                         Submit

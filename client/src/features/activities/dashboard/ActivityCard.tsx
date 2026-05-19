@@ -1,12 +1,12 @@
 import { Box, Button, Card, CardActions, CardContent, Chip, Typography } from '@mui/material'
 import { useActivities } from '../../../lib/hooks/useActivities';
+import { Link } from 'react-router';
 
 type Props = {
-    activity: Activity,
-    selectActivity: (id: string) => void
+    activity: Activity
 }
 
-export default function ActivityCard({ activity, selectActivity }: Props) {
+export default function ActivityCard({ activity }: Props) {
     const { deleteActivity } = useActivities();
 
     return (
@@ -30,7 +30,7 @@ export default function ActivityCard({ activity, selectActivity }: Props) {
             <CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Chip label={activity.category} size="small" color="primary" />
                 <Box display="flex" gap={3}>
-                    <Button size="small" variant="outlined" onClick={() => selectActivity(activity.id)}>View</Button>
+                    <Button size="small" variant="outlined" component={Link} to={`/activities/${activity.id}`}>View</Button>
                     <Button disabled={deleteActivity.isPending} size="small" variant="outlined" onClick={() => deleteActivity.mutate(activity.id)}>Delete</Button>
                 </Box>
             </CardActions>
