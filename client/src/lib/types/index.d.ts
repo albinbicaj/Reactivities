@@ -9,4 +9,5 @@ type Activity = {
   venue: string;
   latitude: number;
   longitude: number;
+  isHost?: boolean;
 }
