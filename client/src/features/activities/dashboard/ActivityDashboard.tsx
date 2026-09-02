@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material'
 import { useState } from 'react'
 import ActivityList from './ActivityList'
-import ActivityFilters, { defaultFilters, ActivityFiltersState } from './ActivityFilters'
+import ActivityFilters, { type ActivityFiltersState, defaultFilters } from './ActivityFilters'
 
 export default function ActivityDashboard() {
     const [filters, setFilters] = useState<ActivityFiltersState>(defaultFilters)

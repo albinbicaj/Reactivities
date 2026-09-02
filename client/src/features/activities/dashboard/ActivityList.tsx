@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material'
 import ActivityCard from './ActivityCard'
 import { useActivities } from '../../../lib/hooks/useActivities'
-import { ActivityFiltersState } from './ActivityFilters'
+import type { ActivityFiltersState } from './ActivityFilters'
 
 type Props = {
     filters: ActivityFiltersState
